@@ -1,0 +1,13 @@
+<div class="container">
+  <h2>Our Gallery</h2>
+  <div class="filter-buttons">
+    <button *ngFor="let cat of categories" [class.active]="selectedCategory === cat" (click)="selectedCategory = cat">
+      {{cat}}
+    </button>
+  </div>
+  <div class="image-grid">
+    <div class="image-card" *ngFor="let img of filteredImages">
+      <img [src]="img.src" alt="gallery image">
+    </div>
+  </div>
+</div>
