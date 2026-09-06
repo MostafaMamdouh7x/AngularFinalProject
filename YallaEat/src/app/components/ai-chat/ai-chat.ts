@@ -86,4 +86,3 @@ export class AiChat{
     this.messages.push({ sender: 'ai', text: aiReply });
   }
 }
-//update
