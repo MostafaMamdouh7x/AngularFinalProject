@@ -1,0 +1,606 @@
+<section class="booking-section">
+
+  <div class="container">
+
+
+
+    <div class="text-center booking-header">
+
+      <span class="section-subtitle">
+        RESERVE YOUR TABLE
+      </span>
+
+      <h1>
+        Book Your <span>Table</span>
+      </h1>
+
+      <p>
+        Reserve your table and enjoy an unforgettable dining experience.
+      </p>
+
+    </div>
+
+
+   
+
+    <div class="row g-4 align-items-start">
+
+
+    
+
+      <div class="col-lg-7">
+
+        <div class="booking-card">
+
+          <!-- Card Header -->
+
+          <div class="card-title">
+
+            <div class="title-icon">
+              <i class="bi bi-calendar-check"></i>
+            </div>
+
+            <div>
+
+              <h3>
+                Reservation Details
+              </h3>
+
+              <p>
+                Fill in your details to reserve a table.
+              </p>
+
+            </div>
+
+          </div>
+
+
+   
+
+          <form [formGroup]="bookingForm" (ngSubmit)="submitBooking()">
+
+            <div class="row g-3">
+
+
+         
+              <div class="col-md-6">
+
+                <label class="form-label">
+
+                  Full Name
+
+                  <span>*</span>
+
+                </label>
+
+
+                <div class="input-group" [class.input-invalid]="
+                f['fullName'].invalid &&
+                f['fullName'].touched
+              ">
+
+                  <span class="input-group-text">
+                    <i class="bi bi-person"></i>
+                  </span>
+
+
+                  <input type="text" class="form-control" placeholder="Enter your name" formControlName="fullName">
+
+                </div>
+
+
+                @if (
+                f['fullName'].invalid &&
+                f['fullName'].touched
+                ) {
+
+                <small class="error-message">
+
+                  @if (f['fullName'].errors?.['required']) {
+                  <span>
+                    Full name is required.
+                  </span>
+                  }
+
+                  @if (f['fullName'].errors?.['minlength']) {
+                  <span>
+                    Name must contain at least 3 characters.
+                  </span>
+                  }
+
+                </small>
+
+                }
+
+              </div>
+
+
+
+              <div class="col-md-6">
+
+                <label class="form-label">
+
+                  Phone Number
+
+                  <span>*</span>
+
+                </label>
+
+
+                <div class="input-group" [class.input-invalid]="
+                f['phone'].invalid &&
+                f['phone'].touched
+              ">
+
+                  <span class="input-group-text">
+                    <i class="bi bi-telephone"></i>
+                  </span>
+
+
+                  <input type="tel" class="form-control" placeholder="+20 123 456 7890" formControlName="phone">
+
+                </div>
+
+
+                @if (
+                f['phone'].invalid &&
+                f['phone'].touched
+                ) {
+
+                <small class="error-message">
+
+                  @if (f['phone'].errors?.['required']) {
+                  <span>
+                    Phone number is required.
+                  </span>
+                  }
+
+                  @if (f['phone'].errors?.['pattern']) {
+                  <span>
+                    Enter a valid phone number.
+                  </span>
+                  }
+
+                </small>
+
+                }
+
+              </div>
+
+
+             
+              <div class="col-12">
+
+                <label class="form-label">
+
+                  Email Address
+
+                  <span>*</span>
+
+                </label>
+
+
+                <div class="input-group" [class.input-invalid]="
+                f['email'].invalid &&
+                f['email'].touched
+              ">
+
+                  <span class="input-group-text">
+                    <i class="bi bi-envelope"></i>
+                  </span>
+
+
+                  <input type="email" class="form-control" placeholder="example@email.com" formControlName="email">
+
+                </div>
+
+
+                @if (
+                f['email'].invalid &&
+                f['email'].touched
+                ) {
+
+                <small class="error-message">
+
+                  @if (f['email'].errors?.['required']) {
+                  <span>
+                    Email is required.
+                  </span>
+                  }
+
+                  @if (f['email'].errors?.['email']) {
+                  <span>
+                    Please enter a valid email address.
+                  </span>
+                  }
+
+                </small>
+
+                }
+
+              </div>
+
+
+              <div class="col-md-4">
+
+                <label class="form-label">
+
+                  Number of Guests
+
+                  <span>*</span>
+
+                </label>
+
+
+                <div class="input-group" [class.input-invalid]="
+                f['guests'].invalid &&
+                f['guests'].touched
+              ">
+
+                  <span class="input-group-text">
+                    <i class="bi bi-people"></i>
+                  </span>
+
+
+                  <select class="form-select" formControlName="guests">
+
+                    <option value="" disabled>
+                      Guests
+                    </option>
+
+                    <option [value]="1">1 Person</option>
+                    <option [value]="2">2 People</option>
+                    <option [value]="3">3 People</option>
+                    <option [value]="4">4 People</option>
+                    <option [value]="5">5 People</option>
+                    <option [value]="6">6+ People</option>
+
+                  </select>
+
+                </div>
+
+
+                @if (
+                f['guests'].invalid &&
+                f['guests'].touched
+                ) {
+
+                <small class="error-message">
+                  Please select the number of guests.
+                </small>
+
+                }
+
+              </div>
+
+
+
+              <div class="col-md-4">
+
+                <label class="form-label">
+
+                  Booking Date
+
+                  <span>*</span>
+
+                </label>
+
+
+                <div class="input-group" [class.input-invalid]="
+                f['date'].invalid &&
+                f['date'].touched
+              ">
+
+                  <span class="input-group-text">
+                    <i class="bi bi-calendar-event"></i>
+                  </span>
+
+
+                  <input type="date" class="form-control" [min]="minDate" formControlName="date">
+
+                </div>
+
+
+                @if (
+                f['date'].invalid &&
+                f['date'].touched
+                ) {
+
+                <small class="error-message">
+                  Booking date is required.
+                </small>
+
+                }
+
+              </div>
+
+              <div class="col-md-4">
+
+                <label class="form-label">
+
+                  Booking Time
+
+                  <span>*</span>
+
+                </label>
+
+
+                <div class="input-group" [class.input-invalid]="
+                f['time'].invalid &&
+                f['time'].touched
+              ">
+
+                  <span class="input-group-text">
+                    <i class="bi bi-clock"></i>
+                  </span>
+
+
+                  <select class="form-select" formControlName="time">
+
+                    <option value="" disabled>
+                      Select Time
+                    </option>
+
+                    <option value="12:00 PM">12:00 PM</option>
+                    <option value="01:00 PM">01:00 PM</option>
+                    <option value="02:00 PM">02:00 PM</option>
+                    <option value="06:00 PM">06:00 PM</option>
+                    <option value="07:00 PM">07:00 PM</option>
+                    <option value="08:00 PM">08:00 PM</option>
+                    <option value="09:00 PM">09:00 PM</option>
+
+                  </select>
+
+                </div>
+
+
+                @if (
+                f['time'].invalid &&
+                f['time'].touched
+                ) {
+
+                <small class="error-message">
+                  Please select a booking time.
+                </small>
+
+                }
+
+              </div>
+
+
+              <div class="col-12">
+
+                <label class="form-label">
+
+                  Special Requests
+
+                  <small>(Optional)</small>
+
+                </label>
+
+
+                <textarea class="form-control request-textarea" rows="4" maxlength="300"
+                  formControlName="specialRequest" placeholder="Tell us if you have any special requests..."></textarea>
+
+
+                <div class="textarea-footer">
+
+                  <small>
+                    Optional information for our team.
+                  </small>
+
+                  <small>
+                    {{ f['specialRequest'].value?.length || 0 }}/300
+                  </small>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <button type="submit" class="btn booking-btn w-100">
+
+              <i class="bi bi-calendar-plus"></i>
+
+              Book Your Table
+
+              <i class="bi bi-arrow-right"></i>
+
+            </button>
+
+          </form>
+
+        </div>
+
+      </div>
+
+      <div class="col-lg-5">
+
+        <div class="bookings-card">
+
+
+
+          <div class="bookings-header">
+
+            <div>
+
+              <span class="section-label">
+                YOUR RESERVATIONS
+              </span>
+
+              <h3>
+                My Bookings
+              </h3>
+
+            </div>
+
+
+            <div class="booking-counter">
+              {{ bookings.length }}
+            </div>
+
+          </div>
+
+
+
+          @if (bookings.length === 0) {
+
+          <div class="empty-bookings">
+
+            <div class="empty-icon">
+              <i class="bi bi-calendar-x"></i>
+            </div>
+
+            <h4>
+              No Bookings Yet
+            </h4>
+
+            <p>
+              Your reservations will appear here after you book a table.
+            </p>
+
+          </div>
+
+          }
+
+
+         
+
+          @if (bookings.length > 0) {
+
+          <div class="bookings-list">
+
+            @for (
+            booking of bookings;
+            track booking.id
+            ) {
+
+            <div class="booking-item">
+
+
+
+              <div class="booking-item-header">
+
+                <div class="booking-avatar">
+
+                  {{ booking.fullName.charAt(0).toUpperCase() }}
+
+                </div>
+
+
+                <div class="booking-name">
+
+                  <h5>
+                    {{ booking.fullName }}
+                  </h5>
+
+                  <span>
+
+                    <i class="bi bi-envelope"></i>
+
+                    {{ booking.email }}
+
+                  </span>
+
+                </div>
+
+
+                <button type="button" class="delete-btn" (click)="deleteBooking(booking.id)" title="Delete Booking"
+                  aria-label="Delete Booking">
+                  <i class="bi bi-trash3"></i>
+                </button>
+
+              </div>
+
+
+              <!-- BOOKING DETAILS -->
+
+              <div class="booking-details">
+
+
+                <div class="booking-detail">
+
+                  <i class="bi bi-calendar-event"></i>
+
+                  <span>
+                    {{ booking.date }}
+                  </span>
+
+                </div>
+
+
+                <div class="booking-detail">
+
+                  <i class="bi bi-clock"></i>
+
+                  <span>
+                    {{ booking.time }}
+                  </span>
+
+                </div>
+
+
+                <div class="booking-detail">
+
+                  <i class="bi bi-people"></i>
+
+                  <span>
+
+                    {{ booking.guests }}
+
+                    Guest{{ booking.guests > 1 ? 's' : '' }}
+
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <!-- PHONE -->
+
+              <div class="booking-phone">
+
+                <i class="bi bi-telephone"></i>
+
+                {{ booking.phone }}
+
+              </div>
+
+
+              <!-- SPECIAL REQUEST -->
+
+              @if (booking.specialRequest) {
+
+              <div class="special-request">
+
+                <i class="bi bi-chat-left-text"></i>
+
+                <span>
+                  {{ booking.specialRequest }}
+                </span>
+
+              </div>
+
+              }
+
+            </div>
+
+            }
+
+          </div>
+
+          }
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+</section>

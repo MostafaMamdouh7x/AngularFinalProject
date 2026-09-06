@@ -1,0 +1,604 @@
+<section class="checkout-section">
+
+
+  <div class="container">
+
+
+
+
+    @if (orderCompleted) {
+
+    <div class="alert order-success-alert" role="alert">
+
+      <div>
+
+        <i class="bi bi-check-circle-fill"></i>
+
+        <strong>
+          Order Placed Successfully!
+        </strong>
+
+        <p>
+          Your delicious food is being prepared.
+        </p>
+
+      </div>
+
+      <button type="button" class="alert-close-btn" (click)="orderCompleted = false">
+
+        <i class="bi bi-x-lg"></i>
+
+      </button>
+
+    </div>
+
+    }
+
+
+
+    <div class="checkout-header text-center">
+
+      <span class="section-subtitle">
+
+        COMPLETE YOUR ORDER
+
+      </span>
+
+
+      <h1>
+
+        Checkout <span>Now</span>
+
+      </h1>
+
+
+      <p>
+
+        Almost there! Complete your details and enjoy your meal.
+
+      </p>
+
+    </div>
+
+
+    <div class="row g-4 align-items-start">
+
+
+
+
+      <div class="col-lg-7">
+
+
+        <div class="checkout-card">
+
+
+
+
+          <div class="card-title">
+
+            <div class="title-icon">
+
+              <i class="bi bi-person-check"></i>
+
+            </div>
+
+
+            <div>
+
+              <h3>
+
+                Customer Information
+
+              </h3>
+
+
+              <p>
+
+                Tell us where to deliver your food.
+
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <form [formGroup]="checkoutForm" (ngSubmit)="placeOrder()">
+
+
+            <div class="row g-3">
+
+
+
+
+              <div class="col-md-6">
+
+
+                <label class="form-label">
+
+                  Full Name
+
+                  <span>*</span>
+
+                </label>
+
+
+                <div class="input-group" [class.input-invalid]="
+                    f['fullName'].invalid &&
+                    f['fullName'].touched
+                  ">
+
+                  <span class="input-group-text">
+
+                    <i class="bi bi-person"></i>
+
+                  </span>
+
+
+                  <input type="text" class="form-control" placeholder="Enter your full name" formControlName="fullName">
+
+                </div>
+
+
+                @if (
+
+                f['fullName'].invalid &&
+                f['fullName'].touched
+
+                ) {
+
+                <small class="error-message">
+
+                  Please enter at least 3 characters.
+
+                </small>
+
+                }
+
+              </div>
+
+
+
+              <div class="col-md-6">
+
+
+                <label class="form-label">
+
+                  Email Address
+
+                  <span>*</span>
+
+                </label>
+
+
+                <div class="input-group" [class.input-invalid]="
+                    f['email'].invalid &&
+                    f['email'].touched
+                  ">
+
+                  <span class="input-group-text">
+
+                    <i class="bi bi-envelope"></i>
+
+                  </span>
+
+
+                  <input type="email" class="form-control" placeholder="example@email.com" formControlName="email">
+
+                </div>
+
+
+                @if (
+
+                f['email'].invalid &&
+                f['email'].touched
+
+                ) {
+
+                <small class="error-message">
+
+                  Please enter a valid email.
+
+                </small>
+
+                }
+
+              </div>
+
+
+
+              <div class="col-md-6">
+
+
+                <label class="form-label">
+
+                  Phone Number
+
+                  <span>*</span>
+
+                </label>
+
+
+                <div class="input-group" [class.input-invalid]="
+                    f['phone'].invalid &&
+                    f['phone'].touched
+                  ">
+
+                  <span class="input-group-text">
+
+                    <i class="bi bi-telephone"></i>
+
+                  </span>
+
+
+                  <input type="tel" class="form-control" placeholder="+20 123 456 7890" formControlName="phone">
+
+                </div>
+
+
+                @if (
+
+                f['phone'].invalid &&
+                f['phone'].touched
+
+                ) {
+
+                <small class="error-message">
+
+                  Please enter a valid phone number.
+
+                </small>
+
+                }
+
+              </div>
+
+
+
+              <div class="col-md-6">
+
+
+                <label class="form-label">
+
+                  Payment Method
+
+                  <span>*</span>
+
+                </label>
+
+
+                <select class="form-select" formControlName="paymentMethod">
+
+                  <option value="cash">
+
+                    Cash on Delivery
+
+                  </option>
+
+
+                  <option value="card">
+
+                    Credit / Debit Card
+
+                  </option>
+
+                </select>
+
+              </div>
+
+
+
+
+              <div class="col-12">
+
+
+                <label class="form-label">
+
+                  Delivery Address
+
+                  <span>*</span>
+
+                </label>
+
+
+                <textarea class="form-control address-textarea" rows="4"
+                  placeholder="Enter your full delivery address..." formControlName="address"></textarea>
+
+
+                @if (
+
+                f['address'].invalid &&
+                f['address'].touched
+
+                ) {
+
+                <small class="error-message">
+
+                  Please enter a complete delivery address.
+
+                </small>
+
+                }
+
+              </div>
+
+
+            </div>
+
+
+
+
+            <button type="submit" class="btn place-order-btn w-100" [disabled]="orderItems.length === 0">
+
+              <i class="bi bi-bag-check"></i>
+
+              Place Order
+
+              <span>
+
+                {{ total }} EGP
+
+              </span>
+
+            </button>
+
+
+          </form>
+
+
+        </div>
+
+      </div>
+
+
+
+      <div class="col-lg-5">
+
+
+        <div class="order-summary-card">
+
+
+          <div class="order-summary-header">
+
+
+            <div>
+
+              <span class="section-label">
+
+                ORDER SUMMARY
+
+              </span>
+
+
+              <h3>
+
+                Your Order
+
+              </h3>
+
+            </div>
+
+
+            <div class="order-count">
+
+              {{ orderItems.length }}
+
+            </div>
+
+          </div>
+
+
+
+
+          @if (orderItems.length === 0) {
+
+
+          <div class="empty-order">
+
+
+            <div class="empty-icon">
+
+              <i class="bi bi-bag-x"></i>
+
+            </div>
+
+
+            <h4>
+
+              Your Order Is Empty
+
+            </h4>
+
+
+            <p>
+
+              Add some delicious food before checking out.
+
+            </p>
+
+
+          </div>
+
+
+          }
+
+
+
+
+          @if (orderItems.length > 0) {
+
+
+          <div class="order-items">
+
+
+            @for (
+
+            item of orderItems;
+
+            track item.id
+
+            ) {
+
+
+            <div class="order-item" appOrderHighlight>
+
+
+              <img [src]="item.image" [alt]="item.name" class="food-image">
+
+
+
+
+              <div class="food-info">
+
+
+                <h5>
+
+                  {{ item.name | foodName }}
+
+                </h5>
+
+
+                <span>
+
+                  {{ item.price }} EGP
+
+                </span>
+
+
+
+                <div class="quantity-control">
+
+
+                  <button type="button" (click)="decreaseQuantity(item)">
+
+                    <i class="bi bi-dash"></i>
+
+                  </button>
+
+
+
+                  <strong>
+
+                    {{ item.quantity }}
+
+                  </strong>
+
+
+                  <button type="button" (click)="increaseQuantity(item)">
+
+                    <i class="bi bi-plus"></i>
+
+                  </button>
+
+
+                </div>
+
+
+              </div>
+
+
+
+
+              <button type="button" class="remove-item-btn" (click)="removeItem(item.id)" title="Remove Item">
+
+                <i class="bi bi-trash3"></i>
+
+              </button>
+
+
+            </div>
+
+
+            }
+
+
+          </div>
+
+
+          <div class="price-details">
+
+
+            <div class="price-row">
+
+              <span>
+
+                Subtotal
+
+              </span>
+
+
+              <strong>
+
+                {{ subtotal }} EGP
+
+              </strong>
+
+            </div>
+
+
+            <div class="price-row">
+
+              <span>
+
+                Delivery
+
+              </span>
+
+
+              <strong>
+
+                {{ deliveryFee }} EGP
+
+              </strong>
+
+            </div>
+
+
+            <div class="price-row total-row">
+
+              <span>
+
+                Total
+
+              </span>
+
+
+              <strong>
+
+                {{ total }} EGP
+
+              </strong>
+
+            </div>
+
+
+          </div>
+
+
+          }
+
+
+
+          <div class="secure-checkout">
+
+            <i class="bi bi-shield-check"></i>
+
+            <span>
+
+              Secure Checkout
+
+            </span>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
