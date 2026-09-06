@@ -178,9 +178,6 @@ export class Checkout {
   }
 
 
-  // ===============================
-  // FORM CONTROLS
-  // ===============================
 
   get f() {
 
@@ -189,9 +186,6 @@ export class Checkout {
   }
 
 
-  // ===============================
-  // SUBTOTAL
-  // ===============================
 
   get subtotal(): number {
 
@@ -211,9 +205,6 @@ export class Checkout {
   }
 
 
-  // ===============================
-  // DELIVERY FEE
-  // ===============================
 
   get deliveryFee(): number {
 
@@ -226,9 +217,6 @@ export class Checkout {
   }
 
 
-  // ===============================
-  // TOTAL
-  // ===============================
 
   get total(): number {
 
@@ -239,9 +227,6 @@ export class Checkout {
   }
 
 
-  // ===============================
-  // PLACE ORDER
-  // ===============================
 
   placeOrder(): void {
 
@@ -278,9 +263,6 @@ export class Checkout {
   }
 
 
-  // ===============================
-  // REMOVE ITEM
-  // ===============================
 
   removeItem(id: number): void {
 
@@ -293,9 +275,7 @@ export class Checkout {
   }
 
 
-  // ===============================
-  // INCREASE QUANTITY
-  // ===============================
+
 
   increaseQuantity(item: OrderItem): void {
 
@@ -304,9 +284,6 @@ export class Checkout {
   }
 
 
-  // ===============================
-  // DECREASE QUANTITY
-  // ===============================
 
   decreaseQuantity(item: OrderItem): void {
 

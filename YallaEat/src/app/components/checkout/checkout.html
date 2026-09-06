@@ -4,49 +4,37 @@
   <div class="container">
 
 
-    <!-- =========================
-         SUCCESS ALERT
-    ========================== -->
+
 
     @if (orderCompleted) {
 
-      <div
-        class="alert order-success-alert"
-        role="alert"
-      >
+    <div class="alert order-success-alert" role="alert">
 
-        <div>
+      <div>
 
-          <i class="bi bi-check-circle-fill"></i>
+        <i class="bi bi-check-circle-fill"></i>
 
-          <strong>
-            Order Placed Successfully!
-          </strong>
+        <strong>
+          Order Placed Successfully!
+        </strong>
 
-          <p>
-            Your delicious food is being prepared.
-          </p>
-
-        </div>
-
-        <button
-          type="button"
-          class="alert-close-btn"
-          (click)="orderCompleted = false"
-        >
-
-          <i class="bi bi-x-lg"></i>
-
-        </button>
+        <p>
+          Your delicious food is being prepared.
+        </p>
 
       </div>
+
+      <button type="button" class="alert-close-btn" (click)="orderCompleted = false">
+
+        <i class="bi bi-x-lg"></i>
+
+      </button>
+
+    </div>
 
     }
 
 
-    <!-- =========================
-         PAGE HEADER
-    ========================== -->
 
     <div class="checkout-header text-center">
 
@@ -76,10 +64,7 @@
     <div class="row g-4 align-items-start">
 
 
-      <!-- =========================
-           LEFT SIDE
-           CUSTOMER INFORMATION
-      ========================== -->
+
 
       <div class="col-lg-7">
 
@@ -87,7 +72,7 @@
         <div class="checkout-card">
 
 
-          <!-- CARD TITLE -->
+
 
           <div class="card-title">
 
@@ -118,23 +103,13 @@
           </div>
 
 
-          <!-- =========================
-               FORM
-          ========================== -->
-
-          <form
-
-            [formGroup]="checkoutForm"
-
-            (ngSubmit)="placeOrder()"
-
-          >
+          <form [formGroup]="checkoutForm" (ngSubmit)="placeOrder()">
 
 
             <div class="row g-3">
 
 
-              <!-- FULL NAME -->
+
 
               <div class="col-md-6">
 
@@ -148,16 +123,10 @@
                 </label>
 
 
-                <div
-
-                  class="input-group"
-
-                  [class.input-invalid]="
+                <div class="input-group" [class.input-invalid]="
                     f['fullName'].invalid &&
                     f['fullName'].touched
-                  "
-
-                >
+                  ">
 
                   <span class="input-group-text">
 
@@ -166,40 +135,29 @@
                   </span>
 
 
-                  <input
-
-                    type="text"
-
-                    class="form-control"
-
-                    placeholder="Enter your full name"
-
-                    formControlName="fullName"
-
-                  >
+                  <input type="text" class="form-control" placeholder="Enter your full name" formControlName="fullName">
 
                 </div>
 
 
                 @if (
 
-                  f['fullName'].invalid &&
-                  f['fullName'].touched
+                f['fullName'].invalid &&
+                f['fullName'].touched
 
                 ) {
 
-                  <small class="error-message">
+                <small class="error-message">
 
-                    Please enter at least 3 characters.
+                  Please enter at least 3 characters.
 
-                  </small>
+                </small>
 
                 }
 
               </div>
 
 
-              <!-- EMAIL -->
 
               <div class="col-md-6">
 
@@ -213,16 +171,10 @@
                 </label>
 
 
-                <div
-
-                  class="input-group"
-
-                  [class.input-invalid]="
+                <div class="input-group" [class.input-invalid]="
                     f['email'].invalid &&
                     f['email'].touched
-                  "
-
-                >
+                  ">
 
                   <span class="input-group-text">
 
@@ -231,40 +183,29 @@
                   </span>
 
 
-                  <input
-
-                    type="email"
-
-                    class="form-control"
-
-                    placeholder="example@email.com"
-
-                    formControlName="email"
-
-                  >
+                  <input type="email" class="form-control" placeholder="example@email.com" formControlName="email">
 
                 </div>
 
 
                 @if (
 
-                  f['email'].invalid &&
-                  f['email'].touched
+                f['email'].invalid &&
+                f['email'].touched
 
                 ) {
 
-                  <small class="error-message">
+                <small class="error-message">
 
-                    Please enter a valid email.
+                  Please enter a valid email.
 
-                  </small>
+                </small>
 
                 }
 
               </div>
 
 
-              <!-- PHONE -->
 
               <div class="col-md-6">
 
@@ -278,16 +219,10 @@
                 </label>
 
 
-                <div
-
-                  class="input-group"
-
-                  [class.input-invalid]="
+                <div class="input-group" [class.input-invalid]="
                     f['phone'].invalid &&
                     f['phone'].touched
-                  "
-
-                >
+                  ">
 
                   <span class="input-group-text">
 
@@ -296,40 +231,29 @@
                   </span>
 
 
-                  <input
-
-                    type="tel"
-
-                    class="form-control"
-
-                    placeholder="+20 123 456 7890"
-
-                    formControlName="phone"
-
-                  >
+                  <input type="tel" class="form-control" placeholder="+20 123 456 7890" formControlName="phone">
 
                 </div>
 
 
                 @if (
 
-                  f['phone'].invalid &&
-                  f['phone'].touched
+                f['phone'].invalid &&
+                f['phone'].touched
 
                 ) {
 
-                  <small class="error-message">
+                <small class="error-message">
 
-                    Please enter a valid phone number.
+                  Please enter a valid phone number.
 
-                  </small>
+                </small>
 
                 }
 
               </div>
 
 
-              <!-- PAYMENT METHOD -->
 
               <div class="col-md-6">
 
@@ -343,13 +267,7 @@
                 </label>
 
 
-                <select
-
-                  class="form-select"
-
-                  formControlName="paymentMethod"
-
-                >
+                <select class="form-select" formControlName="paymentMethod">
 
                   <option value="cash">
 
@@ -369,7 +287,7 @@
               </div>
 
 
-              <!-- ADDRESS -->
+
 
               <div class="col-12">
 
@@ -383,31 +301,22 @@
                 </label>
 
 
-                <textarea
-
-                  class="form-control address-textarea"
-
-                  rows="4"
-
-                  placeholder="Enter your full delivery address..."
-
-                  formControlName="address"
-
-                ></textarea>
+                <textarea class="form-control address-textarea" rows="4"
+                  placeholder="Enter your full delivery address..." formControlName="address"></textarea>
 
 
                 @if (
 
-                  f['address'].invalid &&
-                  f['address'].touched
+                f['address'].invalid &&
+                f['address'].touched
 
                 ) {
 
-                  <small class="error-message">
+                <small class="error-message">
 
-                    Please enter a complete delivery address.
+                  Please enter a complete delivery address.
 
-                  </small>
+                </small>
 
                 }
 
@@ -417,19 +326,9 @@
             </div>
 
 
-            <!-- =========================
-                 PLACE ORDER BUTTON
-            ========================== -->
 
-            <button
 
-              type="submit"
-
-              class="btn place-order-btn w-100"
-
-              [disabled]="orderItems.length === 0"
-
-            >
+            <button type="submit" class="btn place-order-btn w-100" [disabled]="orderItems.length === 0">
 
               <i class="bi bi-bag-check"></i>
 
@@ -452,18 +351,12 @@
       </div>
 
 
-      <!-- =========================
-           RIGHT SIDE
-           ORDER SUMMARY
-      ========================== -->
 
       <div class="col-lg-5">
 
 
         <div class="order-summary-card">
 
-
-          <!-- HEADER -->
 
           <div class="order-summary-header">
 
@@ -495,158 +388,105 @@
           </div>
 
 
-          <!-- EMPTY ORDER -->
+
 
           @if (orderItems.length === 0) {
 
 
-            <div class="empty-order">
+          <div class="empty-order">
 
 
-              <div class="empty-icon">
+            <div class="empty-icon">
 
-                <i class="bi bi-bag-x"></i>
-
-              </div>
-
-
-              <h4>
-
-                Your Order Is Empty
-
-              </h4>
-
-
-              <p>
-
-                Add some delicious food before checking out.
-
-              </p>
-
+              <i class="bi bi-bag-x"></i>
 
             </div>
+
+
+            <h4>
+
+              Your Order Is Empty
+
+            </h4>
+
+
+            <p>
+
+              Add some delicious food before checking out.
+
+            </p>
+
+
+          </div>
 
 
           }
 
 
-          <!-- ORDER ITEMS -->
+
 
           @if (orderItems.length > 0) {
 
 
-            <div class="order-items">
+          <div class="order-items">
 
 
-              @for (
+            @for (
 
-                item of orderItems;
+            item of orderItems;
 
-                track item.id
+            track item.id
 
-              ) {
-
-
-                <div
-
-                  class="order-item"
-
-                  appOrderHighlight
-
-                >
+            ) {
 
 
-                  <!-- FOOD IMAGE -->
-
-                  <img
-
-                    [src]="item.image"
-
-                    [alt]="item.name"
-
-                    class="food-image"
-
-                  >
+            <div class="order-item" appOrderHighlight>
 
 
-                  <!-- FOOD INFO -->
-
-                  <div class="food-info">
+              <img [src]="item.image" [alt]="item.name" class="food-image">
 
 
-                    <h5>
-
-                      {{ item.name | foodName }}
-
-                    </h5>
 
 
-                    <span>
-
-                      {{ item.price }} EGP
-
-                    </span>
+              <div class="food-info">
 
 
-                    <!-- QUANTITY -->
+                <h5>
 
-                    <div class="quantity-control">
+                  {{ item.name | foodName }}
 
-
-                      <button
-
-                        type="button"
-
-                        (click)="decreaseQuantity(item)"
-
-                      >
-
-                        <i class="bi bi-dash"></i>
-
-                      </button>
+                </h5>
 
 
-                      <strong>
+                <span>
 
-                        {{ item.quantity }}
+                  {{ item.price }} EGP
 
-                      </strong>
-
-
-                      <button
-
-                        type="button"
-
-                        (click)="increaseQuantity(item)"
-
-                      >
-
-                        <i class="bi bi-plus"></i>
-
-                      </button>
+                </span>
 
 
-                    </div>
+
+                <div class="quantity-control">
 
 
-                  </div>
+                  <button type="button" (click)="decreaseQuantity(item)">
+
+                    <i class="bi bi-dash"></i>
+
+                  </button>
 
 
-                  <!-- REMOVE -->
 
-                  <button
+                  <strong>
 
-                    type="button"
+                    {{ item.quantity }}
 
-                    class="remove-item-btn"
+                  </strong>
 
-                    (click)="removeItem(item.id)"
 
-                    title="Remove Item"
+                  <button type="button" (click)="increaseQuantity(item)">
 
-                  >
-
-                    <i class="bi bi-trash3"></i>
+                    <i class="bi bi-plus"></i>
 
                   </button>
 
@@ -654,80 +494,90 @@
                 </div>
 
 
-              }
+              </div>
+
+
+
+
+              <button type="button" class="remove-item-btn" (click)="removeItem(item.id)" title="Remove Item">
+
+                <i class="bi bi-trash3"></i>
+
+              </button>
 
 
             </div>
 
 
-            <!-- =========================
-                 PRICE DETAILS
-            ========================== -->
-
-            <div class="price-details">
+            }
 
 
-              <div class="price-row">
-
-                <span>
-
-                  Subtotal
-
-                </span>
+          </div>
 
 
-                <strong>
-
-                  {{ subtotal }} EGP
-
-                </strong>
-
-              </div>
+          <div class="price-details">
 
 
-              <div class="price-row">
+            <div class="price-row">
 
-                <span>
+              <span>
 
-                  Delivery
+                Subtotal
 
-                </span>
-
-
-                <strong>
-
-                  {{ deliveryFee }} EGP
-
-                </strong>
-
-              </div>
+              </span>
 
 
-              <div class="price-row total-row">
+              <strong>
 
-                <span>
+                {{ subtotal }} EGP
 
-                  Total
-
-                </span>
-
-
-                <strong>
-
-                  {{ total }} EGP
-
-                </strong>
-
-              </div>
-
+              </strong>
 
             </div>
+
+
+            <div class="price-row">
+
+              <span>
+
+                Delivery
+
+              </span>
+
+
+              <strong>
+
+                {{ deliveryFee }} EGP
+
+              </strong>
+
+            </div>
+
+
+            <div class="price-row total-row">
+
+              <span>
+
+                Total
+
+              </span>
+
+
+              <strong>
+
+                {{ total }} EGP
+
+              </strong>
+
+            </div>
+
+
+          </div>
 
 
           }
 
 
-          <!-- SECURITY -->
 
           <div class="secure-checkout">
 

@@ -122,9 +122,6 @@ this.bookingForm = this.fb.group({
 
 }
 
-// ===============================
-// GET FORM CONTROLS
-// ===============================
 
 get f() {
 
@@ -134,9 +131,6 @@ return this.bookingForm.controls;
 
 }
 
-// ===============================
-// SUBMIT BOOKING
-// ===============================
 
 submitBooking(): void {
 
@@ -144,7 +138,7 @@ submitBooking(): void {
 this.submitted = true;
 
 
-// Stop if form is invalid
+
 
 if (this.bookingForm.invalid) {
 
@@ -155,12 +149,12 @@ if (this.bookingForm.invalid) {
 }
 
 
-// Get form values
+
 
 const formValue = this.bookingForm.getRawValue();
 
 
-// Create booking object
+
 
 const booking: Book = {
 
@@ -183,12 +177,12 @@ const booking: Book = {
 };
 
 
-// Add booking to list
+
 
 this.bookings.unshift(booking);
 
 
-// Reset form
+
 
 this.bookingForm.reset({
 
@@ -209,16 +203,12 @@ this.bookingForm.reset({
 });
 
 
-// Reset submitted state
 
 this.submitted = false;
  
 
 }
 
-// ===============================
-// DELETE BOOKING
-// ===============================
 
 deleteBooking(id: number): void {
 
