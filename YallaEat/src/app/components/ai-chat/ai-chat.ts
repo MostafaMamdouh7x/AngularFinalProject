@@ -82,7 +82,6 @@ export class AiChat{
         aiReply = 'Based on your preference, I recommend trying our Grilled Chicken or Caesar Salad! 🥗';
       }
     }
-
     this.messages.push({ sender: 'ai', text: aiReply });
   }
 }
