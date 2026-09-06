@@ -3,12 +3,14 @@ import { RouterOutlet } from '@angular/router';
 import { Booking } from './components/booking/booking';
 import { Checkout } from './components/checkout/checkout';
 
+
 @Component({
-  imports: [Checkout,Booking],
   selector: 'app-root',
-  styleUrl: './app.css',
+  standalone: true,
+  imports: [RouterOutlet, RouterLink],  
   templateUrl: './app.html',
+  styleUrl: './app.css'
 })
-export class App {
-  protected readonly title = signal('YallaEat');
+export class AppComponent {
+  title = 'YallaEat';
 }
