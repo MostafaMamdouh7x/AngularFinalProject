@@ -1,0 +1,71 @@
+<section class="menu">
+
+  <!-- Header -->
+  <div class="menu-header">
+    <p class="small-title">OUR MENU</p>
+
+    <h1>Our Delicious Menu</h1>
+
+    <p>
+      Discover our carefully prepared dishes made with fresh ingredients.
+    </p>
+  </div>
+
+
+  <!-- Categories -->
+  <app-category-filter
+    [categories]="categories"
+    [selectedCategory]="selectedCategory"
+    (categorySelected)="selectCategory($event)">
+  </app-category-filter>
+
+
+  <!-- Search + Cart -->
+  <div class="menu-actions">
+
+    <div class="search-box">
+      <input
+        type="text"
+        placeholder="Search for a dish..."
+        [(ngModel)]="searchTerm"
+      />
+    </div>
+
+    <a routerLink="/cart" class="cart-link">
+      <span>🛒</span>
+      View Cart
+    </a>
+
+  </div>
+
+
+  <!-- Products -->
+  <div class="products">
+
+    @for (product of filteredProducts; track product.id) {
+
+      <app-product-card
+        [product]="product">
+      </app-product-card>
+
+    }
+
+  </div>
+
+
+  <!-- No Results -->
+  @if (filteredProducts.length === 0) {
+
+    <div class="no-results">
+
+      <h2>No dishes found</h2>
+
+      <p>
+        Try another search or category.
+      </p>
+
+    </div>
+
+  }
+
+</section>

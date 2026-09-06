@@ -1,0 +1,44 @@
+<article class="product-card">
+
+  <div class="image-container">
+    <img
+      [src]="product.image"
+      [alt]="product.name"
+    >
+  </div>
+
+
+
+  <div class="product-info">
+    <span class="category">
+      {{ product.category }}
+    </span>
+    <h2>{{ product.name }}</h2>
+    <p>{{ product.description }}</p>
+
+    <div class="product-bottom">
+
+      <span class="price">
+        {{ product.price }} EGP
+      </span>
+
+<div class="buttons">
+
+  <a
+  [routerLink]="['/product', product.id]"
+  class="details-btn"
+>
+  View Details
+</a>
+
+  <button class="add-btn" (click)="addToCart()">
+    Add to Cart
+  </button>
+
+</div>
+
+    </div>
+
+  </div>
+
+</article>

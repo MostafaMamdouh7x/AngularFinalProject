@@ -1,0 +1,260 @@
+.product-details {
+  min-height: 100vh;
+  padding: 100px 7% 80px;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(201, 164, 92, 0.08),
+      transparent 35%
+    ),
+    #0b0b0b;
+
+  color: #f5f1e8;
+}
+
+
+/* =========================
+   BACK LINK
+========================= */
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+
+  margin-bottom: 35px;
+
+  color: #c9a45c;
+  text-decoration: none;
+
+  font-size: 14px;
+
+  transition: 0.3s ease;
+}
+
+.back-link:hover {
+  color: #f0d18a;
+  transform: translateX(-4px);
+}
+
+
+/* =========================
+   DETAILS CARD
+========================= */
+
+.details-card {
+  max-width: 1150px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 55px;
+  align-items: center;
+
+  padding: 25px;
+
+  background: #151515;
+  border: 1px solid #2d2923;
+  border-radius: 6px;
+
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+}
+
+
+/* =========================
+   IMAGE
+========================= */
+
+.details-image {
+  width: 100%;
+  height: 520px;
+
+  overflow: hidden;
+  background: #111;
+}
+
+.details-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+
+  transition: transform 0.6s ease;
+}
+
+.details-image:hover img {
+  transform: scale(1.04);
+}
+
+
+/* =========================
+   INFO
+========================= */
+
+.details-info {
+  padding: 25px;
+}
+
+.category {
+  color: #c9a45c;
+
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.details-info h1 {
+  margin: 15px 0 22px;
+
+  color: #d6b36a;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: clamp(40px, 5vw, 60px);
+  font-weight: 500;
+
+  line-height: 1.1;
+}
+
+.description {
+  margin: 0 0 30px;
+
+  color: #999;
+
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+
+/* =========================
+   PRICE
+========================= */
+
+.price {
+  margin-bottom: 30px;
+
+  color: #d6b36a;
+
+  font-size: 26px;
+  font-weight: 600;
+}
+
+
+/* =========================
+   ADD TO CART
+========================= */
+
+.add-btn {
+  padding: 14px 32px;
+
+  background: #c9a45c;
+  color: #0b0b0b;
+
+  border: 1px solid #c9a45c;
+  border-radius: 3px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+.add-btn:hover {
+  background: transparent;
+  color: #d6b36a;
+}
+
+
+/* =========================
+   NOT FOUND
+========================= */
+
+.not-found {
+  max-width: 600px;
+  margin: 80px auto;
+
+  padding: 60px 25px;
+
+  text-align: center;
+
+  background: #151515;
+  border: 1px solid #2d2923;
+}
+
+.not-found h2 {
+  margin: 0 0 20px;
+
+  color: #f3eee4;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 500;
+}
+
+.not-found a {
+  color: #c9a45c;
+  text-decoration: none;
+}
+
+.not-found a:hover {
+  color: #d6b36a;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 850px) {
+
+  .details-card {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .details-image {
+    height: 400px;
+  }
+
+  .details-info {
+    padding: 20px 10px 10px;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+  .product-details {
+    padding: 75px 5% 60px;
+  }
+
+  .details-card {
+    padding: 15px;
+  }
+
+  .details-image {
+    height: 300px;
+  }
+
+  .details-info h1 {
+    font-size: 40px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+
+  .add-btn {
+    width: 100%;
+  }
+
+}

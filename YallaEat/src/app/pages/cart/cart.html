@@ -1,0 +1,163 @@
+<section class="cart">
+
+  <!-- Header -->
+  <div class="cart-header">
+    <p class="small-title">YOUR ORDER</p>
+
+    <h1>Your Cart</h1>
+
+    <p>
+      Review your selected dishes before checkout.
+    </p>
+  </div>
+
+
+  @if (cartItems.length === 0) {
+
+    <!-- Empty Cart -->
+    <div class="empty-cart">
+
+      <div class="empty-icon">🛒</div>
+
+      <h2>Your cart is empty</h2>
+
+      <p>
+        You haven't added any dishes to your cart yet.
+      </p>
+
+      <a routerLink="/menu" class="back-menu">
+        Browse Menu
+      </a>
+
+    </div>
+
+  } @else {
+
+    <!-- Cart Content -->
+    <div class="cart-content">
+
+      <!-- Items -->
+      <div class="cart-items">
+
+        @for (item of cartItems; track item.product.id) {
+
+          <article class="cart-item">
+
+            <img
+              [src]="item.product.image"
+              [alt]="item.product.name"
+            >
+
+            <div class="item-info">
+
+              <span>
+                {{ item.product.category }}
+              </span>
+
+              <h2>
+                {{ item.product.name }}
+              </h2>
+
+              <p>
+                {{ item.product.price }} EGP
+              </p>
+
+            </div>
+
+
+            <!-- Quantity -->
+            <div class="quantity">
+
+              <button
+                type="button"
+                (click)="updateQuantity(
+                  item.product.id,
+                  item.quantity - 1
+                )"
+              >
+                −
+              </button>
+
+              <strong>
+                {{ item.quantity }}
+              </strong>
+
+              <button
+                type="button"
+                (click)="updateQuantity(
+                  item.product.id,
+                  item.quantity + 1
+                )"
+              >
+                +
+              </button>
+
+            </div>
+
+
+            <!-- Total -->
+            <div class="item-total">
+              {{ item.product.price * item.quantity }} EGP
+            </div>
+
+
+            <!-- Remove -->
+            <button
+              type="button"
+              class="remove-btn"
+              (click)="removeItem(item.product.id)"
+            >
+              Remove
+            </button>
+
+          </article>
+
+        }
+
+      </div>
+
+
+      <!-- Summary -->
+      <aside class="cart-summary">
+
+        <h2>Order Summary</h2>
+
+        <div class="summary-row">
+          <span>Items</span>
+          <span>{{ getCartCount() }}</span>
+        </div>
+
+        <div class="summary-row total">
+          <span>Total</span>
+
+          <strong>
+            {{ getTotal() }} EGP
+          </strong>
+        </div>
+
+
+        <!-- Temporary connection point -->
+        <button
+          type="button"
+          class="checkout-btn"
+          routerLink="/checkout"
+        >
+          Proceed to Checkout
+        </button>
+
+
+        <button
+          type="button"
+          class="clear-btn"
+          (click)="clearCart()"
+        >
+          Clear Cart
+        </button>
+
+      </aside>
+
+    </div>
+
+  }
+
+</section>

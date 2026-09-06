@@ -1,0 +1,65 @@
+<section class="product-details">
+
+  <a routerLink="/menu" class="back-link">
+    ← Back to Menu
+  </a>
+
+  @if (product) {
+
+    <div class="details-card">
+
+      <!-- Product Image -->
+      <div class="details-image">
+        <img
+          [src]="product.image"
+          [alt]="product.name"
+        >
+      </div>
+
+
+      <!-- Product Info -->
+      <div class="details-info">
+
+        <span class="category">
+          {{ product.category }}
+        </span>
+
+        <h1>
+          {{ product.name }}
+        </h1>
+
+        <p class="description">
+          {{ product.description }}
+        </p>
+
+        <div class="price">
+          {{ product.price }} EGP
+        </div>
+
+        <button
+          type="button"
+          class="add-btn"
+          (click)="addToCart()"
+        >
+          Add to Cart
+        </button>
+
+      </div>
+
+    </div>
+
+  } @else {
+
+    <div class="not-found">
+
+      <h2>Product not found</h2>
+
+      <a routerLink="/menu">
+        Back to Menu
+      </a>
+
+    </div>
+
+  }
+
+</section>

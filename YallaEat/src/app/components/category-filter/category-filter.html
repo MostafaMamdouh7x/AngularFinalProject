@@ -1,0 +1,12 @@
+<div class="categories">
+
+  @for (category of categories; track category) {
+    <button
+      [class.active]="selectedCategory === category"
+      (click)="selectCategory(category)"
+    >
+      {{ category }}
+    </button>
+  }
+
+</div>
