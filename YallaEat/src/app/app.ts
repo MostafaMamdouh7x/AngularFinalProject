@@ -1,9 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Booking } from './components/booking/booking';
+import { Checkout } from './components/checkout/checkout';
 
 @Component({
-  imports: [Booking],
+  imports: [Checkout,Booking],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
