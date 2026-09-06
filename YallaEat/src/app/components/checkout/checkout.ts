@@ -7,7 +7,11 @@ import {
   Validators
 } from '@angular/forms';
 
-import { OrderItem } from '../../models/order-item';
+import { Router, RouterLink } from '@angular/router';
+
+import { CartItem } from '../../models/product';
+
+import { CartService } from '../../services/cart.service';
 import { FoodNamePipe } from '../../pipes/food-name-pipe';
 import { OrderHighlightDirective } from '../../directives/order-highlight';
 
@@ -16,11 +20,11 @@ import { OrderHighlightDirective } from '../../directives/order-highlight';
 
   selector: 'app-checkout',
 
-  standalone: true,
-
   imports: [
 
     ReactiveFormsModule,
+
+    RouterLink,
 
     FoodNamePipe,
 
@@ -34,7 +38,6 @@ import { OrderHighlightDirective } from '../../directives/order-highlight';
 
 })
 
-
 export class Checkout {
 
 
@@ -46,56 +49,16 @@ export class Checkout {
   orderCompleted = false;
 
 
-  orderItems: OrderItem[] = [
-
-    {
-
-      id: 1,
-
-      name: 'classic beef burger',
-
-      price: 150,
-
-      quantity: 2,
-
-      image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd'
-
-    },
-
-    {
-
-      id: 2,
-
-      name: 'crispy french fries',
-
-      price: 50,
-
-      quantity: 1,
-
-      image: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877'
-
-    },
-
-    {
-
-      id: 3,
-
-      name: 'fresh orange juice',
-
-      price: 45,
-
-      quantity: 2,
-
-      image: 'https://images.unsplash.com/photo-1600271886742-f049cd451bba'
-
-    }
-
-  ];
+  cartItems: CartItem[] = [];
 
 
   constructor(
 
-    private fb: FormBuilder
+    private fb: FormBuilder,
+
+    private cartService: CartService,
+
+    private router: Router
 
   ) {
 
@@ -115,7 +78,6 @@ export class Checkout {
 
       ],
 
-
       email: [
 
         '',
@@ -129,7 +91,6 @@ export class Checkout {
         ]
 
       ],
-
 
       phone: [
 
@@ -145,7 +106,6 @@ export class Checkout {
 
       ],
 
-
       address: [
 
         '',
@@ -160,24 +120,27 @@ export class Checkout {
 
       ],
 
-
       paymentMethod: [
 
         'cash',
 
-        [
-
-          Validators.required
-
-        ]
+        Validators.required
 
       ]
 
     });
 
+
+    // Get real cart items
+
+    this.cartItems = this.cartService.getCart();
+
   }
 
 
+  // =====================================
+  // GET FORM CONTROLS
+  // =====================================
 
   get f() {
 
@@ -186,15 +149,21 @@ export class Checkout {
   }
 
 
+  // =====================================
+  // GET SUBTOTAL
+  // =====================================
 
   get subtotal(): number {
 
-    return this.orderItems.reduce(
+    return this.cartItems.reduce(
 
       (total, item) => {
 
         return total +
-          (item.price * item.quantity);
+
+          item.product.price *
+
+          item.quantity;
 
       },
 
@@ -205,10 +174,13 @@ export class Checkout {
   }
 
 
+  // =====================================
+  // DELIVERY FEE
+  // =====================================
 
   get deliveryFee(): number {
 
-    return this.orderItems.length > 0
+    return this.cartItems.length > 0
 
       ? 30
 
@@ -217,6 +189,9 @@ export class Checkout {
   }
 
 
+  // =====================================
+  // GET TOTAL
+  // =====================================
 
   get total(): number {
 
@@ -227,11 +202,71 @@ export class Checkout {
   }
 
 
+  // =====================================
+  // REMOVE ITEM
+  // =====================================
+
+  removeItem(productId: number): void {
+
+    this.cartService.removeFromCart(productId);
+
+
+    this.cartItems = this.cartService.getCart();
+
+  }
+
+
+  // =====================================
+  // INCREASE QUANTITY
+  // =====================================
+
+  increaseQuantity(item: CartItem): void {
+
+    this.cartService.updateQuantity(
+
+      item.product.id,
+
+      item.quantity + 1
+
+    );
+
+
+    this.cartItems = this.cartService.getCart();
+
+  }
+
+
+  // =====================================
+  // DECREASE QUANTITY
+  // =====================================
+
+  decreaseQuantity(item: CartItem): void {
+
+    this.cartService.updateQuantity(
+
+      item.product.id,
+
+      item.quantity - 1
+
+    );
+
+
+    this.cartItems = this.cartService.getCart();
+
+  }
+
+
+  // =====================================
+  // PLACE ORDER
+  // =====================================
 
   placeOrder(): void {
 
+
     this.submitted = true;
 
+
+    // Validate Form
 
     if (this.checkoutForm.invalid) {
 
@@ -242,8 +277,37 @@ export class Checkout {
     }
 
 
+    // Stop if cart is empty
+
+    if (this.cartItems.length === 0) {
+
+      return;
+
+    }
+
+
+    // Show Success Alert
+
     this.orderCompleted = true;
 
+
+    // Clear Cart
+
+    this.cartService.clearCart();
+
+    this.cartItems = [];
+
+
+    // Reset Form
+
+    this.checkoutForm.reset({
+
+      paymentMethod: 'cash'
+
+    });
+
+
+    // Scroll to Top
 
     window.scrollTo({
 
@@ -254,45 +318,15 @@ export class Checkout {
     });
 
 
+    // Redirect after 3 seconds
+
     setTimeout(() => {
 
-      this.orderCompleted = false;
+      this.router.navigate(['/menu']);
 
-    }, 5000);
-
-  }
-
-
-
-  removeItem(id: number): void {
-
-    this.orderItems = this.orderItems.filter(
-
-      item => item.id !== id
-
-    );
+    }, 3000);
 
   }
 
-
-
-
-  increaseQuantity(item: OrderItem): void {
-
-    item.quantity++;
-
-  }
-
-
-
-  decreaseQuantity(item: OrderItem): void {
-
-    if (item.quantity > 1) {
-
-      item.quantity--;
-
-    }
-
-  }
 
 }
