@@ -1,163 +1,161 @@
 <section class="cart">
 
-  <!-- Header -->
   <div class="cart-header">
     <p class="small-title">YOUR ORDER</p>
 
-    <h1>Your Cart</h1>
+     
+<h1>Your Cart</h1>
 
-    <p>
-      Review your selected dishes before checkout.
-    </p>
+<p>
+  Review your selected dishes before checkout.
+</p>
+     
+
   </div>
 
+@if (cartItems.length === 0) {
 
-  @if (cartItems.length === 0) {
+     
+<div class="empty-cart">
 
-    <!-- Empty Cart -->
-    <div class="empty-cart">
+  <div class="empty-icon">🛒</div>
 
-      <div class="empty-icon">🛒</div>
+  <h2>Your cart is empty</h2>
 
-      <h2>Your cart is empty</h2>
+  <p>
+    You haven't added any dishes to your cart yet.
+  </p>
 
-      <p>
-        You haven't added any dishes to your cart yet.
-      </p>
+  <a routerLink="/menu" class="back-menu">
+    Browse Menu
+  </a>
 
-      <a routerLink="/menu" class="back-menu">
-        Browse Menu
-      </a>
+</div>
+     
 
-    </div>
+} @else {
 
-  } @else {
+     
+<div class="cart-content">
 
-    <!-- Cart Content -->
-    <div class="cart-content">
+  <div class="cart-items">
 
-      <!-- Items -->
-      <div class="cart-items">
+    @for (item of cartItems; track item.product.id) {
 
-        @for (item of cartItems; track item.product.id) {
+      <article class="cart-item">
 
-          <article class="cart-item">
+        <img
+          [src]="item.product.image"
+          [alt]="item.product.name"
+        >
 
-            <img
-              [src]="item.product.image"
-              [alt]="item.product.name"
-            >
+        <div class="item-info">
 
-            <div class="item-info">
+          <span>
+            {{ item.product.category }}
+          </span>
 
-              <span>
-                {{ item.product.category }}
-              </span>
+          <h2>
+            {{ item.product.name }}
+          </h2>
 
-              <h2>
-                {{ item.product.name }}
-              </h2>
+          <p>
+            {{ item.product.price }} EGP
+          </p>
 
-              <p>
-                {{ item.product.price }} EGP
-              </p>
-
-            </div>
-
-
-            <!-- Quantity -->
-            <div class="quantity">
-
-              <button
-                type="button"
-                (click)="updateQuantity(
-                  item.product.id,
-                  item.quantity - 1
-                )"
-              >
-                −
-              </button>
-
-              <strong>
-                {{ item.quantity }}
-              </strong>
-
-              <button
-                type="button"
-                (click)="updateQuantity(
-                  item.product.id,
-                  item.quantity + 1
-                )"
-              >
-                +
-              </button>
-
-            </div>
-
-
-            <!-- Total -->
-            <div class="item-total">
-              {{ item.product.price * item.quantity }} EGP
-            </div>
-
-
-            <!-- Remove -->
-            <button
-              type="button"
-              class="remove-btn"
-              (click)="removeItem(item.product.id)"
-            >
-              Remove
-            </button>
-
-          </article>
-
-        }
-
-      </div>
-
-
-      <!-- Summary -->
-      <aside class="cart-summary">
-
-        <h2>Order Summary</h2>
-
-        <div class="summary-row">
-          <span>Items</span>
-          <span>{{ getCartCount() }}</span>
         </div>
 
-        <div class="summary-row total">
-          <span>Total</span>
+        <div class="quantity">
+
+          <button
+            type="button"
+            (click)="updateQuantity(
+              item.product.id,
+              item.quantity - 1
+            )"
+          >
+            −
+          </button>
 
           <strong>
-            {{ getTotal() }} EGP
+            {{ item.quantity }}
           </strong>
+
+          <button
+            type="button"
+            (click)="updateQuantity(
+              item.product.id,
+              item.quantity + 1
+            )"
+          >
+            +
+          </button>
+
         </div>
 
-
-        <!-- Temporary connection point -->
-        <button
-          type="button"
-          class="checkout-btn"
-          routerLink="/checkout"
-        >
-          Proceed to Checkout
-        </button>
-
+        <div class="item-total">
+          {{ item.product.price * item.quantity }} EGP
+        </div>
 
         <button
           type="button"
-          class="clear-btn"
-          (click)="clearCart()"
+          class="remove-btn"
+          (click)="removeItem(item.product.id)"
         >
-          Clear Cart
+          Remove
         </button>
 
-      </aside>
+      </article>
+
+    }
+
+  </div>
+
+  <aside class="cart-summary">
+
+    <h2>Order Summary</h2>
+
+    <div class="summary-row">
+
+      <span>Items</span>
+
+      <span>
+        {{ getCartCount() }}
+      </span>
 
     </div>
 
-  }
+    <div class="summary-row total">
+
+      <span>Total</span>
+
+      <strong>
+        {{ getTotal() }} EGP
+      </strong>
+
+    </div>
+
+    <button
+      type="button"
+      class="checkout-btn"
+      (click)="proceedToCheckout()"
+    >
+      Proceed to Checkout
+    </button>
+
+    <button
+      type="button"
+      class="clear-btn"
+      (click)="clearCart()"
+    >
+      Clear Cart
+    </button>
+
+  </aside>
+
+</div>
+     
+
+}
 
 </section>
